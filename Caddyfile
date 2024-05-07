@@ -1,0 +1,19 @@
+:8080 {
+    log {
+        output stdout
+        format console
+    }
+
+    root * ./html
+    file_server
+
+    # Health check route without logging
+    @healthcheck {
+        path /health
+    }
+
+    handle @healthcheck {
+        skip_log
+        respond "OK" 200
+    }
+}
